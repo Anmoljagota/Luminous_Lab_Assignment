@@ -2,14 +2,19 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import UserDetailsModal from "../Componenets/UserDetailsModal";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { MainUserDetailsFunction } from "../Redux/action";
 import UserTable from "../Componenets/UserTable";
+import nextId from "react-id-generator";
 const Home = () => {
-  const data = useSelector((userdata) => console.log(userdata));
+  const uniqueid=nextId()
+  const {userdata} = useSelector((details) => ({
+    userdata:details.userdata
+  }),shallowEqual);
   const dispatch = useDispatch();
   const handleClick = (details) => {
-    dispatch(MainUserDetailsFunction(details));
+    const alluserDetails={...details,id:uniqueid}
+    dispatch(MainUserDetailsFunction(alluserDetails));
   };
 
   return (
@@ -31,7 +36,10 @@ const Home = () => {
           </Flex>
         </Flex>
         <Box border="1px solid red" className="mt-10">
-          <UserTable/>
+{userdata.map((ele)=>(
+
+          <UserTable key={ele.id} {...ele}/>
+))}
         </Box>
       </Box>
     </div>

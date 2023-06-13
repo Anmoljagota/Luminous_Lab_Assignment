@@ -25,7 +25,7 @@ const UserDetailsModal = ({handleClick}) => {
   const Userdetails = [
     { name: "Name", placeholder: "Enter Name" },
     { name: "Avatar Image", placeholder: "Enter Image Url" },
-    { name: "Phone Number", placeholder: "Enter Phone Number" },
+    { name: "Phone", placeholder: "Enter Phone Number" },
     { name: "Address", placeholder: "Enter Address" },
     { name: "Label"},
   ];
