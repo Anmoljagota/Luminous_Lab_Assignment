@@ -15,16 +15,23 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react";
-const UserDetailsModal = () => {
+const UserDetailsModal = ({ setDetsails, details }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = React.useRef(null);
   const initialRef = React.useRef(null);
-  const details = [
+  const Userdetails = [
     { name: "Name", placeholder: "Enter Name" },
     { name: "Avatar Image", placeholder: "Enter Image Url" },
     { name: "Phone Number", placeholder: "Enter Phone Number" },
     { name: "Address", placeholder: "Enter Address" },
+    { name: "Label"},
   ];
+
+  //To Add the data to details
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setDetsails({ ...details, [name]: value });
+  }
   return (
     <div>
       <button
@@ -49,14 +56,19 @@ const UserDetailsModal = () => {
           <ModalHeader>Create your account</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            {details.map((items) => (
-              <FormControl>
+            {Userdetails.map((items,i) => (
+              <FormControl key={i}>
                 <FormLabel>{items.name}</FormLabel>
-                <Input ref={initialRef} placeholder={items.placeholder} />
+                <Input
+                  ref={initialRef}
+                  placeholder={items.placeholder}
+                  name={items.name}
+                  onChange={handleChange}
+                />
               </FormControl>
             ))}
             <br />
-            <Select placeholder="Select option">
+            <Select placeholder="Select option" onChange={handleChange} name={Userdetails[Userdetails.length-1].name}>
               <option value="Work">Work</option>
               <option value="Family">Family</option>
               <option value="Friends">Friends</option>
