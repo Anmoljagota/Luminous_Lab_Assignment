@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import {
   Modal,
@@ -15,7 +15,10 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react";
-const UserDetailsModal = ({ setDetsails, details }) => {
+const UserDetailsModal = ({handleClick}) => {
+    //All The User Details Managed in This State
+  const [details,setDetsails]=useState([])
+   //All The User Details Managed in upper State
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = React.useRef(null);
   const initialRef = React.useRef(null);
@@ -77,7 +80,7 @@ const UserDetailsModal = ({ setDetsails, details }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
+            <Button colorScheme="blue" mr={3} onClick={()=>handleClick(details)}>
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>

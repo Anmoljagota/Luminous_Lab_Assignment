@@ -1,10 +1,17 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import UserDetailsModal from "../Componenets/UserDetailsModal";
+import { useSelector, useDispatch } from "react-redux";
+import { MainUserDetailsFunction } from "../Redux/action";
+import UserTable from "../Componenets/UserTable";
 const Home = () => {
-  //All The User Details Managed in This State
-  const [details,setDetsails]=useState([])
+  const data = useSelector((userdata) => console.log(userdata));
+  const dispatch = useDispatch();
+  const handleClick = (details) => {
+    dispatch(MainUserDetailsFunction(details));
+  };
+
   return (
     <div className="min-h-[65vh] w-8/12 shadow-2xl m-auto bg-white">
       <Box className="m-auto w-[90%]">
@@ -20,9 +27,12 @@ const Home = () => {
             style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
           />
           <Flex>
-           <UserDetailsModal setDetsails={setDetsails} details={details}/>
+            <UserDetailsModal handleClick={handleClick} />
           </Flex>
         </Flex>
+        <Box border="1px solid red" className="mt-10">
+          <UserTable/>
+        </Box>
       </Box>
     </div>
   );
