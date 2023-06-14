@@ -1,24 +1,43 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Table,
+  TableContainer,
+  Text,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import UserDetailsModal from "../Componenets/UserDetailsModal";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
-import { MainUserDetailsFunction } from "../Redux/action";
+import { Deleteuser, MainUserDetailsFunction } from "../Redux/action";
 import UserTable from "../Componenets/UserTable";
 import nextId from "react-id-generator";
 const Home = () => {
-  const uniqueid=nextId()
-  const {userdata} = useSelector((details) => ({
-    userdata:details.userdata
-  }),shallowEqual);
+  const uniqueid = nextId();
+  const { userdata } = useSelector(
+    (details) => ({
+      userdata: details.userdata,
+    }),
+    shallowEqual
+  );
   const dispatch = useDispatch();
   const handleClick = (details) => {
-    const alluserDetails={...details,id:uniqueid}
+    const alluserDetails = { ...details, id: uniqueid };
     dispatch(MainUserDetailsFunction(alluserDetails));
   };
+  const handleDelete = (id) => {
+    console.log("deleted id", id);
+    const newUserDetails = userdata.filter((ele) => {
+      return ele.id !== id;
+    });
+dispatch(Deleteuser(newUserDetails));
 
+  };
   return (
-    <div className="min-h-[65vh] w-8/12 shadow-2xl m-auto bg-white">
+    <div className="min-h-[75vh] w-8/12 shadow-2xl m-auto bg-white">
       <Box className="m-auto w-[90%]">
         <Flex className="justify-between items-center">
           <Flex className="justify-center	items-center" gap="10px">
@@ -35,12 +54,20 @@ const Home = () => {
             <UserDetailsModal handleClick={handleClick} />
           </Flex>
         </Flex>
-        <Box border="1px solid red" className="mt-10">
-{userdata.map((ele)=>(
 
-          <UserTable key={ele.id} {...ele}/>
-))}
-        </Box>
+        <TableContainer className="mt-5">
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Name</Th>
+                <Th>Phone Number</Th>
+              </Tr>
+            </Thead>
+            {userdata.map((ele) => (
+              <UserTable key={ele.id} {...ele} handleDelete={handleDelete} />
+            ))}
+          </Table>
+        </TableContainer>
       </Box>
     </div>
   );
