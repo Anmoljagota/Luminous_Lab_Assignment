@@ -15,6 +15,7 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react";
+
 const UpdateDetails = ({ Phone, Name, Image, Address, id, handleUpdate }) => {
   const Userdetails = {
     name: "Name",
@@ -120,6 +121,7 @@ const UpdateDetails = ({ Phone, Name, Image, Address, id, handleUpdate }) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      
     </div>
   );
 };

@@ -15,6 +15,7 @@ import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { Deleteuser, MainUserDetailsFunction } from "../Redux/action";
 import UserTable from "../Componenets/UserTable";
 import nextId from "react-id-generator";
+import Pagination from "../Componenets/Pagination";
 
 const Home = () => {
   const [details, setDetsails] = useState([]);
@@ -66,7 +67,8 @@ const Home = () => {
     setFilterdata(searchdata);
   }
   return (
-    <div className="min-h-[75vh] w-8/12 shadow-2xl m-auto bg-white">
+    <>
+    <div className="min-h-[80vh] w-8/12 shadow-2xl m-auto bg-white">
       <Box className="m-auto w-[90%]">
         <Flex className="justify-between items-center">
           <Flex className="justify-center	items-center" gap="10px">
@@ -92,35 +94,10 @@ const Home = () => {
           </Flex>
         </Flex>
 
-        <TableContainer className="mt-5">
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th>Name</Th>
-                <Th>Phone Number</Th>
-              </Tr>
-            </Thead>
-            {search === ""
-              ? details.map((ele) => (
-                  <UserTable
-                    key={ele.id}
-                    {...ele}
-                    handleDelete={handleDelete}
-                    handleUpdate={handleUpdate}
-                  />
-                ))
-              : filterdata.map((ele) => (
-                  <UserTable
-                    key={ele.id}
-                    {...ele}
-                    handleDelete={handleDelete}
-                    handleUpdate={handleUpdate}
-                  />
-                ))}
-          </Table>
-        </TableContainer>
       </Box>
+        <Pagination details={userdata} handleDelete={handleDelete} handleUpdate={handleUpdate} filterdata={filterdata} search={search}/>
     </div>
+        </>
   );
 };
 
