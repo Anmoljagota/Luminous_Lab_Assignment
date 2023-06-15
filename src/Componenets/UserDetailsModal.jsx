@@ -24,7 +24,7 @@ const UserDetailsModal = ({handleClick}) => {
   const initialRef = React.useRef(null);
   const Userdetails = [
     { name: "Name", placeholder: "Enter Name" },
-    { name: "Avatar Image", placeholder: "Enter Image Url" },
+    { name: "Image", placeholder: "Enter Image Url" },
     { name: "Phone", placeholder: "Enter Phone Number" },
     { name: "Address", placeholder: "Enter Address" },
     { name: "Label"},
@@ -60,15 +60,18 @@ const UserDetailsModal = ({handleClick}) => {
           <ModalCloseButton />
           <ModalBody pb={6}>
             {Userdetails.map((items,i) => (
-              <FormControl key={i}>
+              <>
+             {i<4 && <FormControl key={i}>
                 <FormLabel>{items.name}</FormLabel>
                 <Input
                   ref={initialRef}
                   placeholder={items.placeholder}
                   name={items.name}
                   onChange={handleChange}
-                />
+                  />
               </FormControl>
+             }
+             </>
             ))}
             <br />
             <Select placeholder="Select option" onChange={handleChange} name={Userdetails[Userdetails.length-1].name}>

@@ -1,9 +1,10 @@
 import { Flex, Tbody, Td, Text, Tr } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { BiBookmark } from "react-icons/bi";
-import { MdModeEditOutline } from "react-icons/md";
+
 import { AiFillDelete } from "react-icons/ai";
-const UserTable = ({ Phone, Name , id ,handleDelete }) => {
+import UpdateDetails from "./UpdateDetailsModal";
+const UserTable = ({ Phone, Name , Image, Address, id ,handleDelete , handleUpdate}) => {
   const [detect, setDetect] = useState(false);
 
   function handleMouse(e) {
@@ -48,7 +49,8 @@ const UserTable = ({ Phone, Name , id ,handleDelete }) => {
         )}
         {detect && (
           <Flex gap="10px">
-            <MdModeEditOutline />
+          
+            <UpdateDetails Phone={Phone} Name={Name} id={id} Image={Image} Address={Address} handleUpdate={handleUpdate}/>
             <AiFillDelete onClick={()=>handleDelete(id)}/>
           </Flex>
         )}
