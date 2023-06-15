@@ -18,7 +18,8 @@ import nextId from "react-id-generator";
 
 const Home = () => {
   const [details, setDetsails] = useState([]);
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filterdata, setFilterdata] = useState([]);
   const uniqueid = nextId();
   const { userdata } = useSelector(
     (details) => ({
@@ -48,27 +49,22 @@ const Home = () => {
     console.log("updated data", updatedata);
   };
   const handleFilter = (e) => {
-    console.log(e.target.value);
     const filterdata = userdata.filter((ele) => {
       return ele.Label === e.target.value;
     });
-    console.log("i am filter data", filterdata);
-    if (filterdata.length > 0) {
-      setDetsails(filterdata);
-    }
+    setFilterdata(filterdata);
   };
   function handleSearch(e) {
+    setSearch(e.target.value);
     const searchdata = details.filter((ele) => {
       console.log("hlo", ele.Name);
       if (ele.Name.toLowerCase().includes(e.target.value.toLowerCase())) {
         return ele;
       }
     });
-    console.log("search", searchdata);
-    setSearch(searchdata);
+    // console.log("search",searchdata)
+    setFilterdata(searchdata);
   }
-  console.log("i am search", search);
-  console.log("i am details", details);
   return (
     <div className="min-h-[75vh] w-8/12 shadow-2xl m-auto bg-white">
       <Box className="m-auto w-[90%]">
@@ -104,8 +100,8 @@ const Home = () => {
                 <Th>Phone Number</Th>
               </Tr>
             </Thead>
-            {search.length > 0
-              ? search.map((ele) => (
+            {search === ""
+              ? details.map((ele) => (
                   <UserTable
                     key={ele.id}
                     {...ele}
@@ -113,7 +109,7 @@ const Home = () => {
                     handleUpdate={handleUpdate}
                   />
                 ))
-              : details.map((ele) => (
+              : filterdata.map((ele) => (
                   <UserTable
                     key={ele.id}
                     {...ele}
