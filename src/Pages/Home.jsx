@@ -18,6 +18,7 @@ import nextId from "react-id-generator";
 
 const Home = () => {
   const [details, setDetsails] = useState([]);
+  const [search, setSearch] = useState([]);
   const uniqueid = nextId();
   const { userdata } = useSelector(
     (details) => ({
@@ -56,6 +57,18 @@ const Home = () => {
       setDetsails(filterdata);
     }
   };
+  function handleSearch(e) {
+    const searchdata = details.filter((ele) => {
+      console.log("hlo", ele.Name);
+      if (ele.Name.toLowerCase().includes(e.target.value.toLowerCase())) {
+        return ele;
+      }
+    });
+    console.log("search", searchdata);
+    setSearch(searchdata);
+  }
+  console.log("i am search", search);
+  console.log("i am details", details);
   return (
     <div className="min-h-[75vh] w-8/12 shadow-2xl m-auto bg-white">
       <Box className="m-auto w-[90%]">
@@ -69,6 +82,7 @@ const Home = () => {
             className="rounded-md py-2 px-6"
             placeholder="Search..."
             style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+            onChange={handleSearch}
           />
           <Flex gap="40px">
             <select name="" id="" onChange={handleFilter}>
@@ -90,14 +104,23 @@ const Home = () => {
                 <Th>Phone Number</Th>
               </Tr>
             </Thead>
-            {details.map((ele) => (
-              <UserTable
-                key={ele.id}
-                {...ele}
-                handleDelete={handleDelete}
-                handleUpdate={handleUpdate}
-              />
-            ))}
+            {search.length > 0
+              ? search.map((ele) => (
+                  <UserTable
+                    key={ele.id}
+                    {...ele}
+                    handleDelete={handleDelete}
+                    handleUpdate={handleUpdate}
+                  />
+                ))
+              : details.map((ele) => (
+                  <UserTable
+                    key={ele.id}
+                    {...ele}
+                    handleDelete={handleDelete}
+                    handleUpdate={handleUpdate}
+                  />
+                ))}
           </Table>
         </TableContainer>
       </Box>
