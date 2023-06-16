@@ -16,6 +16,7 @@ const Pagination = ({
   filterdata,
   handleUpdate,
   search,
+  BookMarkUserDetails
 }) => {
   console.log("i am details", details);
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,7 +32,7 @@ const Pagination = ({
     setCurrentPage(currentPage - 1);
   }
   function demo(){
-    
+
   }
   return (
     <div>
@@ -50,6 +51,7 @@ const Pagination = ({
                   {...ele}
                   handleDelete={handleDelete}
                   handleUpdate={handleUpdate}
+                  BookMarkUserDetails={BookMarkUserDetails}
                 />
               ))
             : filterdata.map((ele) => (
@@ -58,6 +60,7 @@ const Pagination = ({
                   {...ele}
                   handleDelete={handleDelete}
                   handleUpdate={handleUpdate}
+                  BookMarkUserDetails={BookMarkUserDetails}
                 />
               ))}
         </Table>

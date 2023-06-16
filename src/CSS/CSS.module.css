@@ -1,0 +1,18 @@
+.Userdetails{
+    /* background: url("https://wallpapercave.com/wp/wp2945061.jpg") no-repeat; */
+    background-color: #353c58;
+   
+}
+.body {
+    width: 350px;
+    background: rgba(255,255,255,.1);
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.3);
+    border-top: 1px solid rgba(255,255,255,.3);
+    border-left: 1px solid rgba(255,255,255,.3);
+    backdrop-filter: blur(10px);
+}
+.Images{
+    transform: translate(-0px,-40px);
+}

@@ -66,6 +66,25 @@ const Home = () => {
     // console.log("search",searchdata)
     setFilterdata(searchdata);
   }
+  const BookMarkUserDetails=(id,setCheck,check)=>{
+    console.log("i ma detilssssssssssssssssssss",details)
+    setCheck(!check)
+    let bookmarkedarr=[]
+console.log("i am id",id)
+details.forEach((item)=>{
+  if(item.id===id ){
+     bookmarkedarr.unshift(item)
+  }
+
+else{
+  bookmarkedarr.push(item)
+}
+})
+console.log("bookmarked",bookmarkedarr)
+setDetsails(bookmarkedarr)
+
+
+  }
   return (
     <>
     <div className="min-h-[80vh] w-8/12 shadow-2xl m-auto bg-white">
@@ -95,7 +114,7 @@ const Home = () => {
         </Flex>
 
       </Box>
-        <Pagination details={userdata} handleDelete={handleDelete} handleUpdate={handleUpdate} filterdata={filterdata} search={search}/>
+        <Pagination details={details} BookMarkUserDetails={BookMarkUserDetails} handleDelete={handleDelete} handleUpdate={handleUpdate} filterdata={filterdata} search={search}/>
     </div>
         </>
   );

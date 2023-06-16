@@ -121,7 +121,7 @@ const UpdateDetails = ({ Phone, Name, Image, Address, id, handleUpdate }) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      
+       
     </div>
   );
 };
